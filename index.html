@@ -1,0 +1,1578 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ranjan Kumar - Full Stack Developer Portfolio</title>
+    <meta name="description" content="Ranjan Kumar - Full Stack Developer crafting digital solutions with code & creativity. Specializing in React, Node.js, and modern web technologies.">
+    <meta name="keywords" content="Ranjan Kumar, Full Stack Developer, React, Node.js, Web Development, Portfolio">
+    <meta property="og:title" content="Ranjan Kumar - Full Stack Developer Portfolio">
+    <meta property="og:description" content="Crafting digital solutions with code & creativity">
+    <meta property="og:type" content="website">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com/3.4.16"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/8.4.7/swiper-bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/8.4.7/swiper-bundle.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#00f5ff',
+                        secondary: '#8b5cf6'
+                    },
+                    borderRadius: {
+                        'none': '0px',
+                        'sm': '4px',
+                        DEFAULT: '8px',
+                        'md': '12px',
+                        'lg': '16px',
+                        'xl': '20px',
+                        '2xl': '24px',
+                        '3xl': '32px',
+                        'full': '9999px',
+                        'button': '8px'
+                    },
+                    fontFamily: {
+                        'space': ['Space Grotesk', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        :where([class^="ri-"])::before {
+            content: "\f3c2";
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+        
+        .glassmorphism {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .gradient-text {
+            background: linear-gradient(45deg, #00f5ff, #8b5cf6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .custom-cursor {
+            width: 20px;
+            height: 20px;
+            border: 2px solid #00f5ff;
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            mix-blend-mode: difference;
+            transition: all 0.3s ease;
+        }
+        
+        .scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 3px;
+            background: linear-gradient(90deg, #00f5ff, #8b5cf6);
+            z-index: 1000;
+            transition: width 0.3s ease;
+        }
+        
+        .floating-animation {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        .typing-animation {
+            overflow: hidden;
+            border-right: 2px solid #00f5ff;
+            white-space: nowrap;
+            animation: typing 3s steps(40, end), blink-caret 0.75s step-end infinite;
+        }
+        
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+        
+        @keyframes blink-caret {
+            from, to { border-color: transparent; }
+            50% { border-color: #00f5ff; }
+        }
+        
+        .skill-bar {
+            position: relative;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        
+        .skill-progress {
+            height: 8px;
+            background: linear-gradient(90deg, #00f5ff, #8b5cf6);
+            border-radius: 10px;
+            transition: width 2s ease-in-out;
+        }
+        
+        .project-card {
+            transition: all 0.3s ease;
+            transform: translateY(0);
+        }
+        
+        .project-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .service-card {
+            min-width: 300px;
+            scroll-snap-align: start;
+        }
+        
+        .timeline-item {
+            position: relative;
+            padding-left: 2rem;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 3px;
+            height: 100%;
+            background: linear-gradient(180deg, #00f5ff, #8b5cf6);
+        }
+        
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            left: -6px;
+            top: 0;
+            width: 15px;
+            height: 15px;
+            background: #00f5ff;
+            border-radius: 50%;
+            border: 3px solid #1a1a2e;
+        }
+        
+        .particles-js-canvas-el {
+            position: absolute !important;
+            top: 0;
+            left: 0;
+            width: 100% !important;
+            height: 100% !important;
+        }
+        
+        .swiper-pagination-bullet {
+            background: #00f5ff !important;
+        }
+        
+        .swiper-button-next,
+        .swiper-button-prev {
+            color: #00f5ff !important;
+        }
+        
+        .contact-form input,
+        .contact-form textarea {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            padding: 1rem;
+            color: white;
+            transition: all 0.3s ease;
+        }
+        
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            outline: none;
+            border-color: #00f5ff;
+            box-shadow: 0 0 20px rgba(0, 245, 255, 0.3);
+        }
+        
+        .contact-form input::placeholder,
+        .contact-form textarea::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+        
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(45deg, #00f5ff, #8b5cf6);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+        
+        .back-to-top.show {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #0f0f23;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+            transition: opacity 0.5s ease;
+        }
+        
+        .loading-screen.hide {
+            opacity: 0;
+            pointer-events: none;
+        }
+        
+        .loader {
+            width: 50px;
+            height: 50px;
+            border: 3px solid rgba(0, 245, 255, 0.3);
+            border-top: 3px solid #00f5ff;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        @media (max-width: 768px) {
+            .hero-content {
+                text-align: center;
+            }
+            
+            .service-scroll {
+                scroll-snap-type: x mandatory;
+                -webkit-overflow-scrolling: touch;
+            }
+            
+            .timeline-item {
+                padding-left: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loader"></div>
+    </div>
+    
+    <div class="custom-cursor" id="cursor"></div>
+    <div class="scroll-progress" id="scrollProgress"></div>
+    
+    <nav class="fixed top-0 w-full z-50 glassmorphism transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="text-2xl font-bold gradient-text">RK</div>
+                
+                <div class="hidden md:flex space-x-8">
+                    <a href="#home" class="nav-link text-white hover:text-primary transition-colors duration-300">Home</a>
+                    <a href="#about" class="nav-link text-white hover:text-primary transition-colors duration-300">About</a>
+                    <a href="#skills" class="nav-link text-white hover:text-primary transition-colors duration-300">Skills</a>
+                    <a href="#projects" class="nav-link text-white hover:text-primary transition-colors duration-300">Projects</a>
+                    <a href="#services" class="nav-link text-white hover:text-primary transition-colors duration-300">Services</a>
+                    <a href="#resume" class="nav-link text-white hover:text-primary transition-colors duration-300">Resume</a>
+                    <a href="#contact" class="nav-link text-white hover:text-primary transition-colors duration-300">Contact</a>
+                </div>
+                
+                <div class="flex items-center space-x-4">
+                    <button class="w-6 h-6 flex items-center justify-center text-white hover:text-primary transition-colors duration-300" id="darkModeToggle">
+                        <i class="ri-moon-line"></i>
+                    </button>
+                    <button class="md:hidden w-6 h-6 flex items-center justify-center text-white" id="mobileMenuToggle">
+                        <i class="ri-menu-line"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="md:hidden glassmorphism absolute top-16 left-0 w-full hidden" id="mobileMenu">
+            <div class="px-4 py-2 space-y-2">
+                <a href="#home" class="block py-2 text-white hover:text-primary transition-colors duration-300">Home</a>
+                <a href="#about" class="block py-2 text-white hover:text-primary transition-colors duration-300">About</a>
+                <a href="#skills" class="block py-2 text-white hover:text-primary transition-colors duration-300">Skills</a>
+                <a href="#projects" class="block py-2 text-white hover:text-primary transition-colors duration-300">Projects</a>
+                <a href="#services" class="block py-2 text-white hover:text-primary transition-colors duration-300">Services</a>
+                <a href="#resume" class="block py-2 text-white hover:text-primary transition-colors duration-300">Resume</a>
+                <a href="#contact" class="block py-2 text-white hover:text-primary transition-colors duration-300">Contact</a>
+            </div>
+        </div>
+    </nav>
+    
+    <section id="home" class="relative min-h-screen flex items-center justify-center overflow-hidden">
+        <div id="particles-js" class="absolute inset-0"></div>
+        
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-2 gap-12 items-center hero-content">
+                <div class="space-y-6">
+                    <h1 class="text-5xl lg:text-7xl font-bold">
+                        Hi, I'm <span class="gradient-text">Ranjan Kumar</span>
+                    </h1>
+                    <div class="text-xl lg:text-2xl text-gray-300 typing-animation" id="typingText">
+                        Crafting digital solutions with code & creativity
+                    </div>
+                    <p class="text-lg text-gray-400 max-w-lg">
+                        Full Stack Developer passionate about creating innovative web applications and user experiences that make a difference.
+                    </p>
+                    <div class="flex space-x-4">
+                        <button class="bg-gradient-to-r from-primary to-secondary px-8 py-3 !rounded-button text-white font-semibold hover:shadow-lg hover:shadow-primary/25 transition-all duration-300 whitespace-nowrap">
+                            View My Work
+                        </button>
+                        <button class="border border-primary px-8 py-3 !rounded-button text-primary font-semibold hover:bg-primary hover:text-white transition-all duration-300 whitespace-nowrap">
+                            Download CV
+                        </button>
+                    </div>
+                    <div class="flex space-x-6 pt-4">
+                        <a href="#" class="w-10 h-10 flex items-center justify-center text-2xl text-white hover:text-primary transition-colors duration-300">
+                            <i class="ri-github-line"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 flex items-center justify-center text-2xl text-white hover:text-primary transition-colors duration-300">
+                            <i class="ri-linkedin-line"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 flex items-center justify-center text-2xl text-white hover:text-primary transition-colors duration-300">
+                            <i class="ri-twitter-line"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 flex items-center justify-center text-2xl text-white hover:text-primary transition-colors duration-300">
+                            <i class="ri-instagram-line"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="flex justify-center">
+                    <div class="floating-animation">
+                        <img src="https://readdy.ai/api/search-image?query=Professional%20full%20stack%20developer%20portrait%20in%20modern%20workspace%20with%20coding%20setup%2C%20dark%20ambient%20lighting%2C%20futuristic%20holographic%20elements%2C%20clean%20minimalist%20background%2C%20high-tech%20atmosphere%2C%20neon%20blue%20and%20purple%20accents%2C%20professional%20headshot%20style%2C%20modern%20technology%20aesthetic&width=500&height=600&seq=hero-portrait&orientation=portrait" 
+                             alt="Ranjan Kumar" 
+                             class="w-80 h-96 object-cover object-top rounded-2xl shadow-2xl">
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+            <div class="w-6 h-10 border-2 border-primary rounded-full flex justify-center">
+                <div class="w-1 h-3 bg-primary rounded-full mt-2 animate-pulse"></div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="about" class="py-20 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl lg:text-5xl font-bold gradient-text mb-4">About Me</h2>
+                <p class="text-xl text-gray-400 max-w-3xl mx-auto">
+                    Passionate developer with 5+ years of experience in creating digital solutions that bridge the gap between design and functionality.
+                </p>
+            </div>
+            
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
+                <div class="space-y-6">
+                    <div class="glassmorphism p-8 rounded-2xl">
+                        <h3 class="text-2xl font-bold mb-4">My Journey</h3>
+                        <p class="text-gray-300 mb-6">
+                            Started as a curious computer science student, evolved into a full-stack developer who loves turning complex problems into simple, beautiful solutions. I specialize in React, Node.js, and modern web technologies.
+                        </p>
+                        
+                        <div class="space-y-4">
+                            <div>
+                                <div class="flex justify-between mb-2">
+                                    <span class="text-sm font-medium">Frontend Development</span>
+                                    <span class="text-sm text-primary">95%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" style="width: 0%" data-width="95%"></div>
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <div class="flex justify-between mb-2">
+                                    <span class="text-sm font-medium">Backend Development</span>
+                                    <span class="text-sm text-primary">90%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" style="width: 0%" data-width="90%"></div>
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <div class="flex justify-between mb-2">
+                                    <span class="text-sm font-medium">UI/UX Design</span>
+                                    <span class="text-sm text-primary">85%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" style="width: 0%" data-width="85%"></div>
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <div class="flex justify-between mb-2">
+                                    <span class="text-sm font-medium">DevOps & Cloud</span>
+                                    <span class="text-sm text-primary">80%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" style="width: 0%" data-width="80%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="space-y-6">
+                    <div class="glassmorphism p-8 rounded-2xl">
+                        <h3 class="text-2xl font-bold mb-6">Experience Timeline</h3>
+                        
+                        <div class="space-y-6">
+                            <div class="timeline-item">
+                                <div class="mb-2">
+                                    <h4 class="font-semibold text-primary">Senior Full Stack Developer</h4>
+                                    <p class="text-sm text-gray-400">TechCorp Solutions • 2022 - Present</p>
+                                </div>
+                                <p class="text-gray-300 text-sm">
+                                    Leading development of enterprise web applications using React, Node.js, and AWS. Mentoring junior developers and implementing best practices.
+                                </p>
+                            </div>
+                            
+                            <div class="timeline-item">
+                                <div class="mb-2">
+                                    <h4 class="font-semibold text-primary">Full Stack Developer</h4>
+                                    <p class="text-sm text-gray-400">StartupHub • 2020 - 2022</p>
+                                </div>
+                                <p class="text-gray-300 text-sm">
+                                    Developed and maintained multiple client projects, focusing on performance optimization and user experience improvements.
+                                </p>
+                            </div>
+                            
+                            <div class="timeline-item">
+                                <div class="mb-2">
+                                    <h4 class="font-semibold text-primary">Frontend Developer</h4>
+                                    <p class="text-sm text-gray-400">WebAgency Pro • 2019 - 2020</p>
+                                </div>
+                                <p class="text-gray-300 text-sm">
+                                    Specialized in creating responsive, interactive web interfaces using modern JavaScript frameworks and CSS preprocessors.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="skills" class="py-20 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl lg:text-5xl font-bold gradient-text mb-4">Skills & Expertise</h2>
+                <p class="text-xl text-gray-400 max-w-3xl mx-auto">
+                    A comprehensive toolkit of modern technologies and frameworks to build exceptional digital experiences.
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="glassmorphism p-8 rounded-2xl text-center skill-card">
+                    <div class="w-20 h-20 mx-auto mb-6 flex items-center justify-center text-4xl text-primary">
+                        <i class="ri-code-s-slash-line"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">Frontend Development</h3>
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm">React.js</span>
+                            <div class="w-24 h-2 bg-gray-700 rounded-full overflow-hidden">
+                                <div class="h-full bg-gradient-to-r from-primary to-secondary rounded-full" style="width: 95%"></div>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm">JavaScript</span>
+                            <div class="w-24 h-2 bg-gray-700 rounded-full overflow-hidden">
+                                <div class="h-full bg-gradient-to-r from-primary to-secondary rounded-full" style="width: 90%"></div>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm">TypeScript</span>
+                            <div class="w-24 h-2 bg-gray-700 rounded-full overflow-hidden">
+                                <div class="h-full bg-gradient-to-r from-primary to-secondary rounded-full" style="width: 85%"></div>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm">CSS/SCSS</span>
+                            <div class="w-24 h-2 bg-gray-700 rounded-full overflow-hidden">
+                                <div class="h-full bg-gradient-to-r from-primary to-secondary rounded-full" style="width: 92%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="glassmorphism p-8 rounded-2xl text-center skill-card">
+                    <div class="w-20 h-20 mx-auto mb-6 flex items-center justify-center text-4xl text-primary">
+                        <i class="ri-server-line"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">Backend Development</h3>
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm">Node.js</span>
+                            <div class="w-24 h-2 bg-gray-700 rounded-full overflow-hidden">
+                                <div class="h-full bg-gradient-to-r from-primary to-secondary rounded-full" style="width: 90%"></div>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm">Express.js</span>
+                            <div class="w-24 h-2 bg-gray-700 rounded-full overflow-hidden">
+                                <div class="h-full bg-gradient-to-r from-primary to-secondary rounded-full" style="width: 88%"></div>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm">MongoDB</span>
+                            <div class="w-24 h-2 bg-gray-700 rounded-full overflow-hidden">
+                                <div class="h-full bg-gradient-to-r from-primary to-secondary rounded-full" style="width: 85%"></div>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm">PostgreSQL</span>
+                            <div class="w-24 h-2 bg-gray-700 rounded-full overflow-hidden">
+                                <div class="h-full bg-gradient-to-r from-primary to-secondary rounded-full" style="width: 80%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="glassmorphism p-8 rounded-2xl text-center skill-card">
+                    <div class="w-20 h-20 mx-auto mb-6 flex items-center justify-center text-4xl text-primary">
+                        <i class="ri-tools-line"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">Tools & Technologies</h3>
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm">Git/GitHub</span>
+                            <div class="w-24 h-2 bg-gray-700 rounded-full overflow-hidden">
+                                <div class="h-full bg-gradient-to-r from-primary to-secondary rounded-full" style="width: 95%"></div>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm">Docker</span>
+                            <div class="w-24 h-2 bg-gray-700 rounded-full overflow-hidden">
+                                <div class="h-full bg-gradient-to-r from-primary to-secondary rounded-full" style="width: 82%"></div>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm">AWS</span>
+                            <div class="w-24 h-2 bg-gray-700 rounded-full overflow-hidden">
+                                <div class="h-full bg-gradient-to-r from-primary to-secondary rounded-full" style="width: 78%"></div>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm">VS Code</span>
+                            <div class="w-24 h-2 bg-gray-700 rounded-full overflow-hidden">
+                                <div class="h-full bg-gradient-to-r from-primary to-secondary rounded-full" style="width: 98%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="projects" class="py-20 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl lg:text-5xl font-bold gradient-text mb-4">Featured Projects</h2>
+                <p class="text-xl text-gray-400 max-w-3xl mx-auto">
+                    A showcase of my recent work, demonstrating expertise across various technologies and domains.
+                </p>
+            </div>
+            
+            <div class="flex flex-wrap justify-center gap-4 mb-12">
+                <button class="filter-btn active px-6 py-2 !rounded-button bg-gradient-to-r from-primary to-secondary text-white font-semibold whitespace-nowrap" data-filter="all">
+                    All Projects
+                </button>
+                <button class="filter-btn px-6 py-2 !rounded-button border border-primary text-primary hover:bg-primary hover:text-white transition-all duration-300 whitespace-nowrap" data-filter="web">
+                    Web Apps
+                </button>
+                <button class="filter-btn px-6 py-2 !rounded-button border border-primary text-primary hover:bg-primary hover:text-white transition-all duration-300 whitespace-nowrap" data-filter="mobile">
+                    Mobile Apps
+                </button>
+                <button class="filter-btn px-6 py-2 !rounded-button border border-primary text-primary hover:bg-primary hover:text-white transition-all duration-300 whitespace-nowrap" data-filter="ai">
+                    AI Projects
+                </button>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8" id="projectsGrid">
+                <div class="project-card glassmorphism rounded-2xl overflow-hidden" data-category="web">
+                    <img src="https://readdy.ai/api/search-image?query=Modern%20e-commerce%20web%20application%20interface%20with%20clean%20design%2C%20shopping%20cart%20functionality%2C%20product%20listings%2C%20responsive%20layout%2C%20dark%20theme%20with%20neon%20accents%2C%20professional%20web%20development%20showcase&width=400&height=250&seq=ecommerce-project&orientation=landscape" 
+                         alt="E-commerce Platform" 
+                         class="w-full h-48 object-cover object-top">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">E-commerce Platform</h3>
+                        <p class="text-gray-400 text-sm mb-4">
+                            Full-featured e-commerce solution with React, Node.js, and Stripe integration. Features include user authentication, product management, and order processing.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-2 py-1 bg-primary/20 text-primary text-xs rounded">React</span>
+                            <span class="px-2 py-1 bg-primary/20 text-primary text-xs rounded">Node.js</span>
+                            <span class="px-2 py-1 bg-primary/20 text-primary text-xs rounded">MongoDB</span>
+                            <span class="px-2 py-1 bg-primary/20 text-primary text-xs rounded">Stripe</span>
+                        </div>
+                        <div class="flex space-x-4">
+                            <button class="flex-1 bg-gradient-to-r from-primary to-secondary px-4 py-2 !rounded-button text-white text-sm font-semibold hover:shadow-lg hover:shadow-primary/25 transition-all duration-300 whitespace-nowrap">
+                                Live Demo
+                            </button>
+                            <button class="border border-primary px-4 py-2 !rounded-button text-primary text-sm font-semibold hover:bg-primary hover:text-white transition-all duration-300 whitespace-nowrap">
+                                GitHub
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="project-card glassmorphism rounded-2xl overflow-hidden" data-category="web">
+                    <img src="https://readdy.ai/api/search-image?query=Social%20media%20dashboard%20interface%20with%20analytics%20charts%2C%20user%20engagement%20metrics%2C%20modern%20dark%20UI%20design%2C%20data%20visualization%2C%20social%20network%20management%20platform%2C%20professional%20web%20application&width=400&height=250&seq=social-dashboard&orientation=landscape" 
+                         alt="Social Media Dashboard" 
+                         class="w-full h-48 object-cover object-top">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">Social Media Dashboard</h3>
+                        <p class="text-gray-400 text-sm mb-4">
+                            Analytics dashboard for social media management with real-time data visualization, post scheduling, and engagement tracking.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-2 py-1 bg-primary/20 text-primary text-xs rounded">Vue.js</span>
+                            <span class="px-2 py-1 bg-primary/20 text-primary text-xs rounded">Express</span>
+                            <span class="px-2 py-1 bg-primary/20 text-primary text-xs rounded">Chart.js</span>
+                            <span class="px-2 py-1 bg-primary/20 text-primary text-xs rounded">Socket.io</span>
+                        </div>
+                        <div class="flex space-x-4">
+                            <button class="flex-1 bg-gradient-to-r from-primary to-secondary px-4 py-2 !rounded-button text-white text-sm font-semibold hover:shadow-lg hover:shadow-primary/25 transition-all duration-300 whitespace-nowrap">
+                                Live Demo
+                            </button>
+                            <button class="border border-primary px-4 py-2 !rounded-button text-primary text-sm font-semibold hover:bg-primary hover:text-white transition-all duration-300 whitespace-nowrap">
+                                GitHub
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="project-card glassmorphism rounded-2xl overflow-hidden" data-category="mobile">
+                    <img src="https://readdy.ai/api/search-image?query=Mobile%20fitness%20tracking%20app%20interface%20with%20workout%20routines%2C%20progress%20charts%2C%20health%20metrics%2C%20modern%20mobile%20UI%20design%2C%20fitness%20application%20mockup%2C%20smartphone%20app%20development%20showcase&width=400&height=250&seq=fitness-app&orientation=landscape" 
+                         alt="Fitness Tracking App" 
+                         class="w-full h-48 object-cover object-top">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">Fitness Tracking App</h3>
+                        <p class="text-gray-400 text-sm mb-4">
+                            Cross-platform mobile app for fitness tracking with workout plans, progress monitoring, and social features built with React Native.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-2 py-1 bg-primary/20 text-primary text-xs rounded">React Native</span>
+                            <span class="px-2 py-1 bg-primary/20 text-primary text-xs rounded">Firebase</span>
+                            <span class="px-2 py-1 bg-primary/20 text-primary text-xs rounded">Redux</span>
+                            <span class="px-2 py-1 bg-primary/20 text-primary text-xs rounded">Expo</span>
+                        </div>
+                        <div class="flex space-x-4">
+                            <button class="flex-1 bg-gradient-to-r from-primary to-secondary px-4 py-2 !rounded-button text-white text-sm font-semibold hover:shadow-lg hover:shadow-primary/25 transition-all duration-300 whitespace-nowrap">
+                                Live Demo
+                            </button>
+                            <button class="border border-primary px-4 py-2 !rounded-button text-primary text-sm font-semibold hover:bg-primary hover:text-white transition-all duration-300 whitespace-nowrap">
+                                GitHub
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="project-card glassmorphism rounded-2xl overflow-hidden" data-category="ai">
+                    <img src="https://readdy.ai/api/search-image?query=AI%20chatbot%20interface%20with%20natural%20language%20processing%2C%20machine%20learning%20visualization%2C%20artificial%20intelligence%20dashboard%2C%20modern%20tech%20UI%2C%20conversational%20AI%20platform%2C%20neural%20network%20graphics&width=400&height=250&seq=ai-chatbot&orientation=landscape" 
+                         alt="AI Chatbot Platform" 
+                         class="w-full h-48 object-cover object-top">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">AI Chatbot Platform</h3>
+                        <p class="text-gray-400 text-sm mb-4">
+                            Intelligent chatbot platform with natural language processing, machine learning integration, and customizable conversation flows.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-2 py-1 bg-primary/20 text-primary text-xs rounded">Python</span>
+                            <span class="px-2 py-1 bg-primary/20 text-primary text-xs rounded">TensorFlow</span>
+                            <span class="px-2 py-1 bg-primary/20 text-primary text-xs rounded">FastAPI</span>
+                            <span class="px-2 py-1 bg-primary/20 text-primary text-xs rounded">OpenAI</span>
+                        </div>
+                        <div class="flex space-x-4">
+                            <button class="flex-1 bg-gradient-to-r from-primary to-secondary px-4 py-2 !rounded-button text-white text-sm font-semibold hover:shadow-lg hover:shadow-primary/25 transition-all duration-300 whitespace-nowrap">
+                                Live Demo
+                            </button>
+                            <button class="border border-primary px-4 py-2 !rounded-button text-primary text-sm font-semibold hover:bg-primary hover:text-white transition-all duration-300 whitespace-nowrap">
+                                GitHub
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="project-card glassmorphism rounded-2xl overflow-hidden" data-category="web">
+                    <img src="https://readdy.ai/api/search-image?query=Project%20management%20web%20application%20with%20task%20boards%2C%20team%20collaboration%20tools%2C%20productivity%20dashboard%2C%20modern%20business%20software%20interface%2C%20project%20tracking%20system%2C%20professional%20web%20development&width=400&height=250&seq=project-management&orientation=landscape" 
+                         alt="Project Management Tool" 
+                         class="w-full h-48 object-cover object-top">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">Project Management Tool</h3>
+                        <p class="text-gray-400 text-sm mb-4">
+                            Collaborative project management platform with task tracking, team communication, and progress visualization features.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-2 py-1 bg-primary/20 text-primary text-xs rounded">Angular</span>
+                            <span class="px-2 py-1 bg-primary/20 text-primary text-xs rounded">NestJS</span>
+                            <span class="px-2 py-1 bg-primary/20 text-primary text-xs rounded">PostgreSQL</span>
+                            <span class="px-2 py-1 bg-primary/20 text-primary text-xs rounded">WebSocket</span>
+                        </div>
+                        <div class="flex space-x-4">
+                            <button class="flex-1 bg-gradient-to-r from-primary to-secondary px-4 py-2 !rounded-button text-white text-sm font-semibold hover:shadow-lg hover:shadow-primary/25 transition-all duration-300 whitespace-nowrap">
+                                Live Demo
+                            </button>
+                            <button class="border border-primary px-4 py-2 !rounded-button text-primary text-sm font-semibold hover:bg-primary hover:text-white transition-all duration-300 whitespace-nowrap">
+                                GitHub
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="project-card glassmorphism rounded-2xl overflow-hidden" data-category="ai">
+                    <img src="https://readdy.ai/api/search-image?query=Machine%20learning%20data%20analysis%20platform%20with%20predictive%20analytics%2C%20data%20visualization%20charts%2C%20AI-powered%20insights%20dashboard%2C%20business%20intelligence%20interface%2C%20statistical%20modeling%20tools&width=400&height=250&seq=ml-analytics&orientation=landscape" 
+                         alt="ML Analytics Platform" 
+                         class="w-full h-48 object-cover object-top">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">ML Analytics Platform</h3>
+                        <p class="text-gray-400 text-sm mb-4">
+                            Machine learning platform for data analysis and predictive modeling with automated insights and visualization capabilities.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-2 py-1 bg-primary/20 text-primary text-xs rounded">Python</span>
+                            <span class="px-2 py-1 bg-primary/20 text-primary text-xs rounded">Scikit-learn</span>
+                            <span class="px-2 py-1 bg-primary/20 text-primary text-xs rounded">Pandas</span>
+                            <span class="px-2 py-1 bg-primary/20 text-primary text-xs rounded">Plotly</span>
+                        </div>
+                        <div class="flex space-x-4">
+                            <button class="flex-1 bg-gradient-to-r from-primary to-secondary px-4 py-2 !rounded-button text-white text-sm font-semibold hover:shadow-lg hover:shadow-primary/25 transition-all duration-300 whitespace-nowrap">
+                                Live Demo
+                            </button>
+                            <button class="border border-primary px-4 py-2 !rounded-button text-primary text-sm font-semibold hover:bg-primary hover:text-white transition-all duration-300 whitespace-nowrap">
+                                GitHub
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="services" class="py-20 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl lg:text-5xl font-bold gradient-text mb-4">Services</h2>
+                <p class="text-xl text-gray-400 max-w-3xl mx-auto">
+                    Comprehensive digital solutions tailored to bring your ideas to life with cutting-edge technology and creative expertise.
+                </p>
+            </div>
+            
+            <div class="flex overflow-x-auto space-x-6 pb-6 service-scroll" style="scroll-snap-type: x mandatory;">
+                <div class="service-card glassmorphism p-8 rounded-2xl text-center">
+                    <div class="w-16 h-16 mx-auto mb-6 flex items-center justify-center text-4xl text-primary">
+                        <i class="ri-code-s-slash-line"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">Web Development</h3>
+                    <p class="text-gray-400 mb-6">
+                        Full-stack web applications using modern frameworks like React, Vue, and Node.js. Responsive, fast, and scalable solutions.
+                    </p>
+                    <ul class="text-sm text-gray-300 space-y-2 mb-6">
+                        <li>• Custom Web Applications</li>
+                        <li>• E-commerce Solutions</li>
+                        <li>• API Development</li>
+                        <li>• Database Design</li>
+                    </ul>
+                    <button class="bg-gradient-to-r from-primary to-secondary px-6 py-2 !rounded-button text-white font-semibold hover:shadow-lg hover:shadow-primary/25 transition-all duration-300 whitespace-nowrap">
+                        Learn More
+                    </button>
+                </div>
+                
+                <div class="service-card glassmorphism p-8 rounded-2xl text-center">
+                    <div class="w-16 h-16 mx-auto mb-6 flex items-center justify-center text-4xl text-primary">
+                        <i class="ri-smartphone-line"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">Mobile Development</h3>
+                    <p class="text-gray-400 mb-6">
+                        Cross-platform mobile applications using React Native and Flutter. Native performance with shared codebase efficiency.
+                    </p>
+                    <ul class="text-sm text-gray-300 space-y-2 mb-6">
+                        <li>• iOS & Android Apps</li>
+                        <li>• Cross-platform Solutions</li>
+                        <li>• App Store Optimization</li>
+                        <li>• Push Notifications</li>
+                    </ul>
+                    <button class="bg-gradient-to-r from-primary to-secondary px-6 py-2 !rounded-button text-white font-semibold hover:shadow-lg hover:shadow-primary/25 transition-all duration-300 whitespace-nowrap">
+                        Learn More
+                    </button>
+                </div>
+                
+                <div class="service-card glassmorphism p-8 rounded-2xl text-center">
+                    <div class="w-16 h-16 mx-auto mb-6 flex items-center justify-center text-4xl text-primary">
+                        <i class="ri-palette-line"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">UI/UX Design</h3>
+                    <p class="text-gray-400 mb-6">
+                        User-centered design solutions that combine aesthetics with functionality. Creating intuitive and engaging digital experiences.
+                    </p>
+                    <ul class="text-sm text-gray-300 space-y-2 mb-6">
+                        <li>• User Interface Design</li>
+                        <li>• User Experience Research</li>
+                        <li>• Prototyping & Wireframing</li>
+                        <li>• Design Systems</li>
+                    </ul>
+                    <button class="bg-gradient-to-r from-primary to-secondary px-6 py-2 !rounded-button text-white font-semibold hover:shadow-lg hover:shadow-primary/25 transition-all duration-300 whitespace-nowrap">
+                        Learn More
+                    </button>
+                </div>
+                
+                <div class="service-card glassmorphism p-8 rounded-2xl text-center">
+                    <div class="w-16 h-16 mx-auto mb-6 flex items-center justify-center text-4xl text-primary">
+                        <i class="ri-brain-line"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">AI Solutions</h3>
+                    <p class="text-gray-400 mb-6">
+                        Artificial intelligence and machine learning solutions to automate processes and provide intelligent insights for your business.
+                    </p>
+                    <ul class="text-sm text-gray-300 space-y-2 mb-6">
+                        <li>• Chatbot Development</li>
+                        <li>• Predictive Analytics</li>
+                        <li>• Natural Language Processing</li>
+                        <li>• Computer Vision</li>
+                    </ul>
+                    <button class="bg-gradient-to-r from-primary to-secondary px-6 py-2 !rounded-button text-white font-semibold hover:shadow-lg hover:shadow-primary/25 transition-all duration-300 whitespace-nowrap">
+                        Learn More
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="resume" class="py-20 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl lg:text-5xl font-bold gradient-text mb-4">Resume</h2>
+                <p class="text-xl text-gray-400 max-w-3xl mx-auto">
+                    A comprehensive overview of my educational background, professional experience, and key achievements in software development.
+                </p>
+                <button class="mt-8 bg-gradient-to-r from-primary to-secondary px-8 py-3 !rounded-button text-white font-semibold hover:shadow-lg hover:shadow-primary/25 transition-all duration-300 whitespace-nowrap">
+                    <i class="ri-download-line mr-2"></i>
+                    Download CV
+                </button>
+            </div>
+            
+            <div class="grid lg:grid-cols-2 gap-12">
+                <div>
+                    <h3 class="text-2xl font-bold mb-8 text-center">Education</h3>
+                    <div class="space-y-6">
+                        <div class="glassmorphism p-6 rounded-2xl">
+                            <div class="flex items-start space-x-4">
+                                <div class="w-12 h-12 flex items-center justify-center text-2xl text-primary">
+                                    <i class="ri-graduation-cap-line"></i>
+                                </div>
+                                <div class="flex-1">
+                                    <h4 class="font-bold text-lg">Master of Computer Science</h4>
+                                    <p class="text-primary font-medium">Stanford University</p>
+                                    <p class="text-gray-400 text-sm">2017 - 2019</p>
+                                    <p class="text-gray-300 text-sm mt-2">
+                                        Specialized in Machine Learning and Distributed Systems. Thesis on "Scalable Web Applications using Microservices Architecture."
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="glassmorphism p-6 rounded-2xl">
+                            <div class="flex items-start space-x-4">
+                                <div class="w-12 h-12 flex items-center justify-center text-2xl text-primary">
+                                    <i class="ri-graduation-cap-line"></i>
+                                </div>
+                                <div class="flex-1">
+                                    <h4 class="font-bold text-lg">Bachelor of Computer Engineering</h4>
+                                    <p class="text-primary font-medium">University of California, Berkeley</p>
+                                    <p class="text-gray-400 text-sm">2013 - 2017</p>
+                                    <p class="text-gray-300 text-sm mt-2">
+                                        Graduated Magna Cum Laude. Focus on Software Engineering and Web Technologies. Active member of Computer Science Society.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-2xl font-bold mb-8 text-center">Experience</h3>
+                    <div class="space-y-6">
+                        <div class="glassmorphism p-6 rounded-2xl">
+                            <div class="flex items-start space-x-4">
+                                <div class="w-12 h-12 flex items-center justify-center text-2xl text-primary">
+                                    <i class="ri-briefcase-line"></i>
+                                </div>
+                                <div class="flex-1">
+                                    <h4 class="font-bold text-lg">Senior Full Stack Developer</h4>
+                                    <p class="text-primary font-medium">TechCorp Solutions</p>
+                                    <p class="text-gray-400 text-sm">2022 - Present</p>
+                                    <p class="text-gray-300 text-sm mt-2">
+                                        Lead development of enterprise applications serving 100K+ users. Mentoring team of 5 developers and implementing DevOps practices.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="glassmorphism p-6 rounded-2xl">
+                            <div class="flex items-start space-x-4">
+                                <div class="w-12 h-12 flex items-center justify-center text-2xl text-primary">
+                                    <i class="ri-briefcase-line"></i>
+                                </div>
+                                <div class="flex-1">
+                                    <h4 class="font-bold text-lg">Full Stack Developer</h4>
+                                    <p class="text-primary font-medium">StartupHub Inc.</p>
+                                    <p class="text-gray-400 text-sm">2020 - 2022</p>
+                                    <p class="text-gray-300 text-sm mt-2">
+                                        Developed and maintained multiple client projects. Improved application performance by 40% and reduced loading times significantly.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="glassmorphism p-6 rounded-2xl">
+                            <div class="flex items-start space-x-4">
+                                <div class="w-12 h-12 flex items-center justify-center text-2xl text-primary">
+                                    <i class="ri-briefcase-line"></i>
+                                </div>
+                                <div class="flex-1">
+                                    <h4 class="font-bold text-lg">Frontend Developer</h4>
+                                    <p class="text-primary font-medium">WebAgency Pro</p>
+                                    <p class="text-gray-400 text-sm">2019 - 2020</p>
+                                    <p class="text-gray-300 text-sm mt-2">
+                                        Created responsive web interfaces for various clients. Specialized in React.js and modern CSS frameworks with focus on user experience.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-16">
+                <h3 class="text-2xl font-bold mb-8 text-center">Certifications & Awards</h3>
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div class="glassmorphism p-6 rounded-2xl text-center">
+                        <div class="w-12 h-12 mx-auto mb-4 flex items-center justify-center text-2xl text-primary">
+                            <i class="ri-award-line"></i>
+                        </div>
+                        <h4 class="font-bold mb-2">AWS Certified</h4>
+                        <p class="text-gray-400 text-sm">Solutions Architect Professional</p>
+                    </div>
+                    
+                    <div class="glassmorphism p-6 rounded-2xl text-center">
+                        <div class="w-12 h-12 mx-auto mb-4 flex items-center justify-center text-2xl text-primary">
+                            <i class="ri-award-line"></i>
+                        </div>
+                        <h4 class="font-bold mb-2">Google Cloud</h4>
+                        <p class="text-gray-400 text-sm">Professional Developer</p>
+                    </div>
+                    
+                    <div class="glassmorphism p-6 rounded-2xl text-center">
+                        <div class="w-12 h-12 mx-auto mb-4 flex items-center justify-center text-2xl text-primary">
+                            <i class="ri-trophy-line"></i>
+                        </div>
+                        <h4 class="font-bold mb-2">Hackathon Winner</h4>
+                        <p class="text-gray-400 text-sm">TechCrunch Disrupt 2023</p>
+                    </div>
+                    
+                    <div class="glassmorphism p-6 rounded-2xl text-center">
+                        <div class="w-12 h-12 mx-auto mb-4 flex items-center justify-center text-2xl text-primary">
+                            <i class="ri-medal-line"></i>
+                        </div>
+                        <h4 class="font-bold mb-2">Best Employee</h4>
+                        <p class="text-gray-400 text-sm">TechCorp Solutions 2023</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="testimonials" class="py-20 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl lg:text-5xl font-bold gradient-text mb-4">Testimonials</h2>
+                <p class="text-xl text-gray-400 max-w-3xl mx-auto">
+                    What clients and colleagues say about working with me and the impact of my contributions to their projects.
+                </p>
+            </div>
+            
+            <div class="swiper testimonial-swiper">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <div class="glassmorphism p-8 rounded-2xl text-center max-w-2xl mx-auto">
+                            <div class="w-20 h-20 mx-auto mb-6 rounded-full overflow-hidden">
+                                <img src="https://readdy.ai/api/search-image?query=Professional%20business%20woman%20CEO%20portrait%2C%20confident%20executive%20headshot%2C%20modern%20office%20background%2C%20professional%20corporate%20photography%2C%20leadership%20portrait%2C%20business%20professional&width=80&height=80&seq=testimonial-1&orientation=squarish" 
+                                     alt="Sarah Johnson" 
+                                     class="w-full h-full object-cover object-top">
+                            </div>
+                            <p class="text-lg text-gray-300 mb-6 italic">
+                                "Ranjan delivered an exceptional e-commerce platform that exceeded our expectations. His attention to detail and technical expertise helped us increase our online sales by 150% within the first quarter."
+                            </p>
+                            <h4 class="font-bold text-xl">Sarah Johnson</h4>
+                            <p class="text-primary">CEO, RetailTech Solutions</p>
+                        </div>
+                    </div>
+                    
+                    <div class="swiper-slide">
+                        <div class="glassmorphism p-8 rounded-2xl text-center max-w-2xl mx-auto">
+                            <div class="w-20 h-20 mx-auto mb-6 rounded-full overflow-hidden">
+                                <img src="https://readdy.ai/api/search-image?query=Professional%20business%20man%20CTO%20portrait%2C%20technology%20executive%20headshot%2C%20modern%20tech%20office%20background%2C%20professional%20corporate%20photography%2C%20tech%20leadership%20portrait&width=80&height=80&seq=testimonial-2&orientation=squarish" 
+                                     alt="Michael Chen" 
+                                     class="w-full h-full object-cover object-top">
+                            </div>
+                            <p class="text-lg text-gray-300 mb-6 italic">
+                                "Working with Ranjan was a game-changer for our startup. He not only built our MVP but also provided valuable insights on scalability and user experience. Highly recommended!"
+                            </p>
+                            <h4 class="font-bold text-xl">Michael Chen</h4>
+                            <p class="text-primary">CTO, InnovateNow</p>
+                        </div>
+                    </div>
+                    
+                    <div class="swiper-slide">
+                        <div class="glassmorphism p-8 rounded-2xl text-center max-w-2xl mx-auto">
+                            <div class="w-20 h-20 mx-auto mb-6 rounded-full overflow-hidden">
+                                <img src="https://readdy.ai/api/search-image?query=Professional%20business%20woman%20project%20manager%20portrait%2C%20confident%20team%20leader%20headshot%2C%20modern%20corporate%20office%20background%2C%20professional%20business%20photography&width=80&height=80&seq=testimonial-3&orientation=squarish" 
+                                     alt="Emily Rodriguez" 
+                                     class="w-full h-full object-cover object-top">
+                            </div>
+                            <p class="text-lg text-gray-300 mb-6 italic">
+                                "Ranjan's expertise in both frontend and backend development made our project seamless. He delivered on time, within budget, and the quality was outstanding. A true professional!"
+                            </p>
+                            <h4 class="font-bold text-xl">Emily Rodriguez</h4>
+                            <p class="text-primary">Project Manager, DigitalFlow</p>
+                        </div>
+                    </div>
+                    
+                    <div class="swiper-slide">
+                        <div class="glassmorphism p-8 rounded-2xl text-center max-w-2xl mx-auto">
+                            <div class="w-20 h-20 mx-auto mb-6 rounded-full overflow-hidden">
+                                <img src="https://readdy.ai/api/search-image?query=Professional%20business%20man%20startup%20founder%20portrait%2C%20young%20entrepreneur%20headshot%2C%20modern%20startup%20office%20background%2C%20professional%20business%20photography%2C%20innovation%20leader&width=80&height=80&seq=testimonial-4&orientation=squarish" 
+                                     alt="David Park" 
+                                     class="w-full h-full object-cover object-top">
+                            </div>
+                            <p class="text-lg text-gray-300 mb-6 italic">
+                                "The mobile app Ranjan developed for us has been a huge success. His understanding of user experience and technical implementation is impressive. We've seen a 200% increase in user engagement."
+                            </p>
+                            <h4 class="font-bold text-xl">David Park</h4>
+                            <p class="text-primary">Founder, MobileFirst</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="swiper-pagination mt-8"></div>
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="contact" class="py-20 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl lg:text-5xl font-bold gradient-text mb-4">Get In Touch</h2>
+                <p class="text-xl text-gray-400 max-w-3xl mx-auto">
+                    Ready to start your next project? Let's discuss how we can work together to bring your ideas to life with innovative solutions.
+                </p>
+            </div>
+            
+            <div class="grid lg:grid-cols-2 gap-12">
+                <div class="space-y-8">
+                    <div class="glassmorphism p-8 rounded-2xl">
+                        <h3 class="text-2xl font-bold mb-6">Send Message</h3>
+                        <form class="contact-form space-y-6">
+                            <div class="grid md:grid-cols-2 gap-4">
+                                <div>
+                                    <input type="text" placeholder="Your Name" class="w-full" required>
+                                </div>
+                                <div>
+                                    <input type="email" placeholder="Your Email" class="w-full" required>
+                                </div>
+                            </div>
+                            <div>
+                                <input type="text" placeholder="Subject" class="w-full" required>
+                            </div>
+                            <div>
+                                <textarea rows="6" placeholder="Your Message" class="w-full resize-none" required></textarea>
+                            </div>
+                            <button type="submit" class="w-full bg-gradient-to-r from-primary to-secondary px-8 py-3 !rounded-button text-white font-semibold hover:shadow-lg hover:shadow-primary/25 transition-all duration-300 whitespace-nowrap">
+                                Send Message
+                            </button>
+                        </form>
+                    </div>
+                </div>
+                
+                <div class="space-y-8">
+                    <div class="glassmorphism p-8 rounded-2xl">
+                        <h3 class="text-2xl font-bold mb-6">Contact Information</h3>
+                        
+                        <div class="space-y-6">
+                            <div class="flex items-center space-x-4">
+                                <div class="w-12 h-12 flex items-center justify-center text-2xl text-primary">
+                                    <i class="ri-map-pin-line"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold">Address</h4>
+                                    <p class="text-gray-400">San Francisco, CA 94102</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-center space-x-4">
+                                <div class="w-12 h-12 flex items-center justify-center text-2xl text-primary">
+                                    <i class="ri-phone-line"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold">Phone</h4>
+                                    <p class="text-gray-400">+1 (555) 123-4567</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-center space-x-4">
+                                <div class="w-12 h-12 flex items-center justify-center text-2xl text-primary">
+                                    <i class="ri-mail-line"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold">Email</h4>
+                                    <p class="text-gray-400">ranjan.kumar@email.com</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-center space-x-4">
+                                <div class="w-12 h-12 flex items-center justify-center text-2xl text-primary">
+                                    <i class="ri-time-line"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold">Availability</h4>
+                                    <p class="text-gray-400">Mon - Fri: 9:00 AM - 6:00 PM</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-8 pt-8 border-t border-gray-700">
+                            <h4 class="font-semibold mb-4">Follow Me</h4>
+                            <div class="flex space-x-4">
+                                <a href="#" class="w-10 h-10 flex items-center justify-center text-xl text-white hover:text-primary transition-colors duration-300 glassmorphism rounded-lg">
+                                    <i class="ri-github-line"></i>
+                                </a>
+                                <a href="#" class="w-10 h-10 flex items-center justify-center text-xl text-white hover:text-primary transition-colors duration-300 glassmorphism rounded-lg">
+                                    <i class="ri-linkedin-line"></i>
+                                </a>
+                                <a href="#" class="w-10 h-10 flex items-center justify-center text-xl text-white hover:text-primary transition-colors duration-300 glassmorphism rounded-lg">
+                                    <i class="ri-twitter-line"></i>
+                                </a>
+                                <a href="#" class="w-10 h-10 flex items-center justify-center text-xl text-white hover:text-primary transition-colors duration-300 glassmorphism rounded-lg">
+                                    <i class="ri-instagram-line"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="glassmorphism p-8 rounded-2xl">
+                        <h3 class="text-xl font-bold mb-4">Location</h3>
+                        <div class="h-48 bg-gray-800 rounded-lg overflow-hidden" style="background-image: url('https://public.readdy.ai/gen_page/map_placeholder_1280x720.png'); background-size: cover; background-position: center;">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <footer class="py-12 border-t border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-3 gap-8 mb-8">
+                <div>
+                    <div class="text-2xl font-bold gradient-text mb-4">Ranjan Kumar</div>
+                    <p class="text-gray-400 mb-4">
+                        Full Stack Developer passionate about creating innovative digital solutions that make a difference.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="w-8 h-8 flex items-center justify-center text-lg text-white hover:text-primary transition-colors duration-300">
+                            <i class="ri-github-line"></i>
+                        </a>
+                        <a href="#" class="w-8 h-8 flex items-center justify-center text-lg text-white hover:text-primary transition-colors duration-300">
+                            <i class="ri-linkedin-line"></i>
+                        </a>
+                        <a href="#" class="w-8 h-8 flex items-center justify-center text-lg text-white hover:text-primary transition-colors duration-300">
+                            <i class="ri-twitter-line"></i>
+                        </a>
+                        <a href="#" class="w-8 h-8 flex items-center justify-center text-lg text-white hover:text-primary transition-colors duration-300">
+                            <i class="ri-instagram-line"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="font-bold text-lg mb-4">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#about" class="text-gray-400 hover:text-primary transition-colors duration-300">About</a></li>
+                        <li><a href="#skills" class="text-gray-400 hover:text-primary transition-colors duration-300">Skills</a></li>
+                        <li><a href="#projects" class="text-gray-400 hover:text-primary transition-colors duration-300">Projects</a></li>
+                        <li><a href="#services" class="text-gray-400 hover:text-primary transition-colors duration-300">Services</a></li>
+                        <li><a href="#contact" class="text-gray-400 hover:text-primary transition-colors duration-300">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="font-bold text-lg mb-4">Services</h3>
+                    <ul class="space-y-2">
+                        <li><span class="text-gray-400">Web Development</span></li>
+                        <li><span class="text-gray-400">Mobile Development</span></li>
+                        <li><span class="text-gray-400">UI/UX Design</span></li>
+                        <li><span class="text-gray-400">AI Solutions</span></li>
+                        <li><span class="text-gray-400">Consulting</span></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 pt-8 text-center">
+                <p class="text-gray-400">
+                    &copy; 2025 Ranjan Kumar. All rights reserved. Made with ❤️ using modern web technologies.
+                </p>
+            </div>
+        </div>
+    </footer>
+    
+    <div class="back-to-top" id="backToTop">
+        <i class="ri-arrow-up-line text-white text-xl"></i>
+    </div>
+    
+    <script id="particles-config">
+        document.addEventListener('DOMContentLoaded', function() {
+            particlesJS('particles-js', {
+                particles: {
+                    number: { value: 80, density: { enable: true, value_area: 800 } },
+                    color: { value: "#00f5ff" },
+                    shape: { type: "circle" },
+                    opacity: { value: 0.5, random: false },
+                    size: { value: 3, random: true },
+                    line_linked: {
+                        enable: true,
+                        distance: 150,
+                        color: "#00f5ff",
+                        opacity: 0.4,
+                        width: 1
+                    },
+                    move: {
+                        enable: true,
+                        speed: 6,
+                        direction: "none",
+                        random: false,
+                        straight: false,
+                        out_mode: "out",
+                        bounce: false
+                    }
+                },
+                interactivity: {
+                    detect_on: "canvas",
+                    events: {
+                        onhover: { enable: true, mode: "repulse" },
+                        onclick: { enable: true, mode: "push" },
+                        resize: true
+                    },
+                    modes: {
+                        grab: { distance: 400, line_linked: { opacity: 1 } },
+                        bubble: { distance: 400, size: 40, duration: 2, opacity: 8, speed: 3 },
+                        repulse: { distance: 200, duration: 0.4 },
+                        push: { particles_nb: 4 },
+                        remove: { particles_nb: 2 }
+                    }
+                },
+                retina_detect: true
+            });
+        });
+    </script>
+    
+    <script id="loading-screen">
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(function() {
+                document.getElementById('loadingScreen').classList.add('hide');
+            }, 2000);
+        });
+    </script>
+    
+    <script id="cursor-tracking">
+        document.addEventListener('DOMContentLoaded', function() {
+            const cursor = document.getElementById('cursor');
+            
+            document.addEventListener('mousemove', function(e) {
+                cursor.style.left = e.clientX + 'px';
+                cursor.style.top = e.clientY + 'px';
+            });
+            
+            document.addEventListener('mouseenter', function() {
+                cursor.style.opacity = '1';
+            });
+            
+            document.addEventListener('mouseleave', function() {
+                cursor.style.opacity = '0';
+            });
+        });
+    </script>
+    
+    <script id="scroll-progress">
+        document.addEventListener('DOMContentLoaded', function() {
+            const scrollProgress = document.getElementById('scrollProgress');
+            
+            window.addEventListener('scroll', function() {
+                const scrollTop = window.pageYOffset;
+                const docHeight = document.body.scrollHeight - window.innerHeight;
+                const scrollPercent = (scrollTop / docHeight) * 100;
+                scrollProgress.style.width = scrollPercent + '%';
+            });
+        });
+    </script>
+    
+    <script id="navigation-functionality">
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+            const mobileMenu = document.getElementById('mobileMenu');
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            mobileMenuToggle.addEventListener('click', function() {
+                mobileMenu.classList.toggle('hidden');
+                const icon = mobileMenuToggle.querySelector('i');
+                if (mobileMenu.classList.contains('hidden')) {
+                    icon.className = 'ri-menu-line';
+                } else {
+                    icon.className = 'ri-close-line';
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href').substring(1);
+                    const targetElement = document.getElementById(targetId);
+                    
+                    if (targetElement) {
+                        targetElement.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                    
+                    if (!mobileMenu.classList.contains('hidden')) {
+                        mobileMenu.classList.add('hidden');
+                        mobileMenuToggle.querySelector('i').className = 'ri-menu-line';
+                    }
+                });
+            });
+            
+            window.addEventListener('scroll', function() {
+                const navbar = document.getElementById('navbar');
+                if (window.scrollY > 100) {
+                    navbar.style.background = 'rgba(15, 15, 35, 0.95)';
+                } else {
+                    navbar.style.background = 'rgba(255, 255, 255, 0.1)';
+                }
+            });
+        });
+    </script>
+    
+    <script id="skill-bars-animation">
+        document.addEventListener('DOMContentLoaded', function() {
+            gsap.registerPlugin(ScrollTrigger);
+            
+            gsap.utils.toArray('.skill-progress').forEach(bar => {
+                const width = bar.dataset.width;
+                gsap.to(bar, {
+                    width: width,
+                    duration: 2,
+                    ease: "power2.out",
+                    scrollTrigger: {
+                        trigger: bar,
+                        start: "top 80%",
+                        toggleActions: "play none none reverse"
+                    }
+                });
+            });
+        });
+    </script>
+    
+    <script id="project-filtering">
+        document.addEventListener('DOMContentLoaded', function() {
+            const filterBtns = document.querySelectorAll('.filter-btn');
+            const projectCards = document.querySelectorAll('.project-card');
+            
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const filter = this.dataset.filter;
+                    
+                    filterBtns.forEach(b => {
+                        b.classList.remove('active', 'bg-gradient-to-r', 'from-primary', 'to-secondary', 'text-white');
+                        b.classList.add('border', 'border-primary', 'text-primary', 'hover:bg-primary', 'hover:text-white');
+                    });
+                    
+                    this.classList.remove('border', 'border-primary', 'text-primary', 'hover:bg-primary', 'hover:text-white');
+                    this.classList.add('active', 'bg-gradient-to-r', 'from-primary', 'to-secondary', 'text-white');
+                    
+                    projectCards.forEach(card => {
+                        if (filter === 'all' || card.dataset.category === filter) {
+                            card.style.display = 'block';
+                            gsap.fromTo(card, 
+                                { opacity: 0, y: 20 },
+                                { opacity: 1, y: 0, duration: 0.5 }
+                            );
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+    
+    <script id="testimonials-swiper">
+        document.addEventListener('DOMContentLoaded', function() {
+            new Swiper('.testimonial-swiper', {
+                slidesPerView: 1,
+                spaceBetween: 30,
+                loop: true,
+                autoplay: {
+                    delay: 5000,
+                    disableOnInteraction: false,
+                },
+                pagination: {
+                    el: '.swiper-pagination',
+                    clickable: true,
+                },
+                navigation: {
+                    nextEl: '.swiper-button-next',
+                    prevEl: '.swiper-button-prev',
+                },
+            });
+        });
+    </script>
+    
+    <script id="contact-form">
+        document.addEventListener('DOMContentLoaded', function() {
+            const contactForm = document.querySelector('.contact-form');
+            
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const submitBtn = this.querySelector('button[type="submit"]');
+                const originalText = submitBtn.textContent;
+                
+                submitBtn.textContent = 'Sending...';
+                submitBtn.disabled = true;
+                
+                setTimeout(() => {
+                    submitBtn.textContent = 'Message Sent!';
+                    submitBtn.style.background = 'linear-gradient(45deg, #10b981, #059669)';
+                    
+                    setTimeout(() => {
+                        submitBtn.textContent = originalText;
+                        submitBtn.disabled = false;
+                        submitBtn.style.background = '';
+                        contactForm.reset();
+                    }, 2000);
+                }, 1500);
+            });
+        });
+    </script>
+    
+    <script id="back-to-top">
+        document.addEventListener('DOMContentLoaded', function() {
+            const backToTop = document.getElementById('backToTop');
+            
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 500) {
+                    backToTop.classList.add('show');
+                } else {
+                    backToTop.classList.remove('show');
+                }
+            });
+            
+            backToTop.addEventListener('click', function() {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+    
+    <script id="gsap-animations">
+        document.addEventListener('DOMContentLoaded', function() {
+            gsap.registerPlugin(ScrollTrigger);
+            
+            gsap.utils.toArray('.glassmorphism').forEach(element => {
+                gsap.fromTo(element, 
+                    { opacity: 0, y: 50 },
+                    {
+                        opacity: 1,
+                        y: 0,
+                        duration: 1,
+                        ease: "power2.out",
+                        scrollTrigger: {
+                            trigger: element,
+                            start: "top 80%",
+                            toggleActions: "play none none reverse"
+                        }
+                    }
+                );
+            });
+            
+            gsap.utils.toArray('.skill-card').forEach((card, index) => {
+                gsap.fromTo(card,
+                    { opacity: 0, y: 30 },
+                    {
+                        opacity: 1,
+                        y: 0,
+                        duration: 0.8,
+                        delay: index * 0.2,
+                        ease: "power2.out",
+                        scrollTrigger: {
+                            trigger: card,
+                            start: "top 80%",
+                            toggleActions: "play none none reverse"
+                        }
+                    }
+                );
+            });
+        });
+    </script>
+</body>
+</html>
